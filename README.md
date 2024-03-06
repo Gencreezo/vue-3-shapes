@@ -1,6 +1,6 @@
 # vue-3-shapes
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a small application for drawing and manipulating shapes on a canvas using Vue 3.
 
 ## Recommended IDE Setup
 

@@ -5,6 +5,7 @@ import {
 	calculateCircleRadius,
 	calculateRectangleArea,
 	calculateCircleArea,
+	updateCornerPoints,
 } from './shapes'
 import { store } from '@/store/store'
 
@@ -38,10 +39,18 @@ export function useDrag(element) {
 			positions.movementY = positions.clientY - e.clientY
 			positions.clientX = e.clientX
 			positions.clientY = e.clientY
-			element.value.style.top =
-				element.value.offsetTop - positions.movementY + 'px'
-			element.value.style.left =
-				element.value.offsetLeft - positions.movementX + 'px'
+
+			// Update the position of the element
+			const newTop = element.value.offsetTop - positions.movementY
+			const newLeft = element.value.offsetLeft - positions.movementX
+			element.value.style.top = newTop + 'px'
+			element.value.style.left = newLeft + 'px'
+
+			// Recalculate the corner points
+			const width = parseInt(element.value.style.width)
+			const height = parseInt(element.value.style.height)
+
+			updateCornerPoints(newTop, newLeft, width, height)
 		}
 		document.onmouseup = () => {
 			document.onmousemove = null
@@ -89,18 +98,19 @@ export function useResize(element, childSelector) {
 					break
 			}
 
-			store.selectedShape.area = calculateRectangleArea(
-				element.value.style.width,
-				element.value.style.height
-			)
+			let width = element.value.style.width
+			let height = element.value.style.height
+			let top = element.value.style.top
+			let left = element.value.style.left
+
+			store.selectedShape.area = calculateRectangleArea(width, height)
+
+			updateCornerPoints(top, left, width, height)
 
 			if (childSelector) {
 				const childElement = element.value.querySelector(childSelector)
 				if (childElement) {
-					let radius = calculateCircleRadius(
-						element.value.style.width,
-						element.value.style.height
-					)
+					let radius = calculateCircleRadius(width, height)
 					childElement.style.width = `${radius * 2}px`
 					childElement.style.height = `${radius * 2}px`
 					store.selectedShape.childShape = {

@@ -51,6 +51,7 @@ export function useParallelogramAndCircle(vertices, addShapeCallback) {
 				},
 			}
 			store.setSelectedShape(shape)
+			updateCornerPoints(p1.y, p1.x, width, height)
 			addShapeCallback(shape)
 		}
 	}
@@ -102,4 +103,21 @@ export function calculateCircleRadius(width, height) {
 
 export function calculateCircleArea(radius) {
 	return Math.PI * Math.pow(radius, 2)
+}
+
+export function updateCornerPoints(top, left, width, height) {
+	top = parseFloat(top).toFixed(0)
+	left = parseFloat(left).toFixed(0)
+	width = parseFloat(width).toFixed(0)
+	height = parseFloat(height).toFixed(0)
+	console.log(top, left, width, height)
+	const updatedCornerPoints = [
+		{ x: left, y: top },
+		{ x: left + width, y: top },
+		{ x: left, y: top + height },
+		{ x: left + width, y: top + height },
+	]
+
+	// Update the cornerPoints in the store
+	store.selectedShape.cornerPoints = updatedCornerPoints
 }

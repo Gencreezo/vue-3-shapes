@@ -14,8 +14,8 @@
 <style scoped>
 	.resize-handle {
 		position: absolute;
-		width: 10px;
-		height: 10px;
+		width: 11px;
+		height: 11px;
 		background-color: red;
 		cursor: pointer;
 		border-radius: 50%;
