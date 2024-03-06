@@ -117,7 +117,6 @@ export function useResize(element, childSelector) {
 						name: 'Circle',
 						area: calculateCircleArea(radius),
 					}
-					console.log(store.selectedShape)
 				}
 			}
 		}

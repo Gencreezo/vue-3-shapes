@@ -110,7 +110,6 @@ export function updateCornerPoints(top, left, width, height) {
 	left = parseFloat(left).toFixed(0)
 	width = parseFloat(width).toFixed(0)
 	height = parseFloat(height).toFixed(0)
-	console.log(top, left, width, height)
 	const updatedCornerPoints = [
 		{ x: left, y: top },
 		{ x: left + width, y: top },
